@@ -2,7 +2,7 @@
 
 A premium, interactive cybersecurity portfolio showcasing security research, penetration testing tools, and bug bounty writeups. Built with a futuristic, terminal-inspired dark theme designed for security operations and ethical hacking presentations.
 
-🌐 **Live Demo:** [Insert Your Live Link Here]
+🌐 **Live Demo:** [https://kharedhruva-tech.github.io/portfolio/]
 
 ---
 
