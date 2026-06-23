@@ -1,0 +1,6 @@
+.dist/
+dist/
+node_modules/
+.gemini/
+.DS_Store
+Thumbs.db

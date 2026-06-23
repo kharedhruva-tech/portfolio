@@ -4,18 +4,84 @@
    ============================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initMatrixRain();
-    initParticles();
-    initSpotlight();
-    initNavigation();
-    initTypingEffect();
-    initTerminalAnimation();
-    initScrollAnimations();
-    initSkillBars();
-    initCounters();
-    initContributionGraph();
-    initContactForm();
+    runLoader(() => {
+        initMatrixRain();
+        initParticles();
+        initSpotlight();
+        initNavigation();
+        initTypingEffect();
+        initTerminalAnimation();
+        initScrollAnimations();
+        initSkillBars();
+        initCounters();
+        initContributionGraph();
+        initContactForm();
+    });
 });
+
+/* ============================
+   SYSTEM SECURE BOOT LOADER
+   ============================ */
+function runLoader(callback) {
+    const overlay = document.getElementById('loader-overlay');
+    const progressBar = document.getElementById('loader-progress-bar');
+    const percentageText = document.getElementById('loader-percentage');
+    const terminal = document.getElementById('loader-terminal');
+    
+    if (!overlay || !progressBar || !percentageText || !terminal) {
+        document.body.classList.remove('loading');
+        if (callback) callback();
+        return;
+    }
+    
+    const messages = [
+        { text: 'SECURE LINK INITIALIZED...', delay: 150 },
+        { text: 'LOADING SECURITY INTEGRITY MODULES... [SUCCESS]', delay: 600 },
+        { text: 'DECRYPTING INTERFACE ARCHITECTURE...', delay: 1100 },
+        { text: 'BYPASS COMPLETE. ACCESS GRANTED.', delay: 1550, success: true }
+    ];
+    
+    // Log messages sequentially
+    messages.forEach(msg => {
+        setTimeout(() => {
+            const line = document.createElement('div');
+            line.className = `loader-line${msg.success ? ' success' : ''}`;
+            line.textContent = `> ${msg.text}`;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+        }, msg.delay);
+    });
+    
+    // Animate progress bar
+    const start = performance.now();
+    const duration = 1800; // 1.8 seconds loading simulation
+    
+    function updateProgress(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const percent = Math.floor(progress * 100);
+        
+        progressBar.style.width = `${percent}%`;
+        percentageText.textContent = `${percent}%`;
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateProgress);
+        } else {
+            // Complete
+            setTimeout(() => {
+                overlay.classList.add('fade-out');
+                document.body.classList.remove('loading');
+                
+                // Trigger callback after fade-out transition completes
+                setTimeout(() => {
+                    if (callback) callback();
+                }, 600); // matches --transition-slow / 0.6s
+            }, 300);
+        }
+    }
+    
+    requestAnimationFrame(updateProgress);
+}
 
 /* ============================
    MATRIX RAIN EFFECT
@@ -328,7 +394,7 @@ function initTerminalAnimation() {
                     initTerminalAnimation();
                 }, 4000);
             }
-        }, line.delay + 1500); // Extra delay for initial load
+        }, line.delay); // Starts typing immediately when initialized
     });
 }
 
